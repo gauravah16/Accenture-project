@@ -6,189 +6,238 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f8f9fa;
+      background-color: #f3f4f6;
       margin: 0;
-      padding: 0;
+      padding: 20px;
     }
+
     .dashboard {
-      background-color: #ffffff;
-      padding: 20px;
-      border-radius: 8px;
-      margin: 20px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      max-width: 1100px;
+      margin: auto;
     }
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-    .header h1 {
-      font-size: 1.5em;
-      display: flex;
-      align-items: center;
-    }
-    .header h1::before {
-      content: "🚚";
-      margin-right: 8px;
-    }
-    .header button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      margin-left: 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 0.9em;
-    }
-    .header button:last-child {
-      background-color: #e9ecef;
-      color: #000;
-    }
-    .schedule, .pre-gate {
+
+    .section {
       background-color: #fff;
-      border-radius: 8px;
-      padding: 20px;
-      margin-top: 20px;
+      border-radius: 10px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
-    .schedule h2, .pre-gate h2 {
-      margin-bottom: 5px;
-    }
-    .schedule p, .pre-gate p {
+
+    .section h2 {
       margin-top: 0;
-      color: #666;
-      font-size: 0.9em;
     }
+
+    .section p {
+      color: #555;
+      margin-bottom: 15px;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 15px;
+      margin-top: 10px;
     }
-    table th, table td {
-      border-bottom: 1px solid #ddd;
+
+    th, td {
       padding: 12px;
       text-align: left;
+      border-bottom: 1px solid #ddd;
     }
-    .status {
-      border-radius: 12px;
-      padding: 4px 10px;
-      font-size: 0.8em;
-      display: inline-block;
+
+    th {
+      background-color: #f0f0f0;
     }
-    .in-transit {
-      background-color: #fff3cd;
-      color: #856404;
-    }
-    .scheduled {
-      background-color: #d4edda;
-      color: #155724;
-    }
-    .delayed {
-      background-color: #f8d7da;
-      color: #721c24;
-    }
+
     .form-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 15px;
-      margin-top: 15px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
     }
-    .form-grid label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-    .form-grid input {
+
+    input[type="text"], select, input[type="datetime-local"] {
       width: 100%;
-      padding: 8px;
+      padding: 10px;
       border: 1px solid #ccc;
-      border-radius: 4px;
+      border-radius: 6px;
     }
-    .confirm-button {
-      margin-top: 20px;
-      background-color: #28a745;
+
+    button {
+      background-color: #007bff;
       color: white;
       padding: 12px 20px;
       border: none;
       border-radius: 6px;
       font-size: 1em;
       cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .map-container img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    ul.insights {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul.insights li {
+      margin-bottom: 15px;
+    }
+
+    .icon {
+      font-size: 1.2em;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    .desc {
+      display: block;
+      color: #555;
+      font-size: 0.9em;
+      margin-top: 2px;
+    }
+
+    .ai-button {
+      background-color: #6f42c1;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+      cursor: pointer;
+      float: right;
     }
   </style>
 </head>
 <body>
   <div class="dashboard">
-    <div class="header">
-      <h1>Raw Material Scheduling Dashboard</h1>
-      <div>
-        <button>+ Add Schedule</button>
-        <button>Today's Plan</button>
-      </div>
-    </div>
 
-    <div class="schedule">
-      <h2>Incoming Truck Schedule</h2>
-      <p>Real-time status of all scheduled raw material deliveries.</p>
+    <!-- 1. Raw Material Scheduling Dashboard -->
+    <div class="section">
+      <h2>Raw Material Scheduling Dashboard</h2>
+      <p>Overview of all scheduled raw material arrivals.</p>
       <table>
-        <thead>
-          <tr>
-            <th>PO NUMBER</th>
-            <th>VEHICLE NUMBER</th>
-            <th>MATERIAL</th>
-            <th>ID CARD</th>
-            <th>STATUS</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>PO-78901</td>
-            <td>MH-01 AB 1234</td>
-            <td>Steel Coils</td>
-            <td>ID-5678</td>
-            <td><span class="status in-transit">In Transit</span></td>
-          </tr>
-          <tr>
-            <td>PO-23456</td>
-            <td>GJ-05 CD 5678</td>
-            <td>Cement Bags</td>
-            <td>ID-1234</td>
-            <td><span class="status scheduled">Scheduled</span></td>
-          </tr>
-          <tr>
-            <td>PO-90123</td>
-            <td>KA-04 EF 9012</td>
-            <td>Plastic Pellets</td>
-            <td>ID-9012</td>
-            <td><span class="status delayed">Delayed</span></td>
-          </tr>
-        </tbody>
+        <tr>
+          <th>Material</th>
+          <th>Supplier</th>
+          <th>Scheduled Date</th>
+          <th>Status</th>
+        </tr>
+        <tr>
+          <td>Steel Coils</td>
+          <td>Tata Steel</td>
+          <td>2025-08-08</td>
+          <td>Confirmed</td>
+        </tr>
+        <tr>
+          <td>Plastic Pellets</td>
+          <td>Reliance Polymers</td>
+          <td>2025-08-08</td>
+          <td>Pending</td>
+        </tr>
+        <tr>
+          <td>Packaging Boxes</td>
+          <td>Uflex Ltd</td>
+          <td>2025-08-09</td>
+          <td>Confirmed</td>
+        </tr>
       </table>
     </div>
 
-    <div class="pre-gate">
-      <h2>Pre-Gate In Data Entry</h2>
-      <p>Enter details for new incoming trucks before they arrive.</p>
+    <!-- 2. Incoming Truck Scheduling -->
+    <div class="section">
+      <h2>Incoming Truck Scheduling</h2>
+      <p>Schedule slots for upcoming truck arrivals.</p>
       <div class="form-grid">
         <div>
-          <label for="po-number">PO Number</label>
-          <input type="text" id="po-number" placeholder="e.g., PO-12345">
+          <label>Truck Number</label>
+          <input type="text" placeholder="MH12AB1234">
         </div>
         <div>
-          <label for="vehicle-number">Vehicle Number</label>
-          <input type="text" id="vehicle-number" placeholder="e.g., MH-01 XY 9876">
+          <label>Material</label>
+          <input type="text" placeholder="Steel Coils">
         </div>
         <div>
-          <label for="material">Material</label>
-          <input type="text" id="material" placeholder="e.g., Concrete Blocks">
+          <label>Preferred Slot</label>
+          <input type="datetime-local">
         </div>
         <div>
-          <label for="id-card">ID Card</label>
-          <input type="text" id="id-card" placeholder="e.g., ID-4321">
+          <label>Supplier</label>
+          <input type="text" placeholder="Tata Steel">
         </div>
       </div>
-      <button class="confirm-button">✅ Confirm Pre-Gate In</button>
+      <button>Schedule Truck</button>
     </div>
+
+    <!-- 3. Pre-Gate In Data Entry -->
+    <div class="section">
+      <h2>Pre-Gate In Data Entry</h2>
+      <p>Complete before truck enters the gate.</p>
+      <div class="form-grid">
+        <div>
+          <label>Truck Number</label>
+          <input type="text" placeholder="MH12AB1234">
+        </div>
+        <div>
+          <label>Driver Name</label>
+          <input type="text" placeholder="Ramesh Kumar">
+        </div>
+        <div>
+          <label>Driver Mobile</label>
+          <input type="text" placeholder="9876543210">
+        </div>
+        <div>
+          <label>Vehicle Type</label>
+          <select>
+            <option>Flatbed</option>
+            <option>Tanker</option>
+            <option>Trailer</option>
+          </select>
+        </div>
+      </div>
+      <button>Submit Entry</button>
+    </div>
+
+    <!-- 4. GPS Tracking -->
+    <div class="section">
+      <h2>GPS Tracking</h2>
+      <p>Live location of all incoming trucks.</p>
+      <div class="map-container">
+        <img src="b4786864-5938-405d-a420-893a9f600fd1.png" alt="Map of trucks">
+      </div>
+      <div style="display: flex; justify-content: space-between; color: #777;">
+        <span>Last updated: 10:30 AM</span>
+        <a href="#">View Full Map →</a>
+      </div>
+    </div>
+
+    <!-- 5. AI-Powered Scheduling -->
+    <div class="section">
+      <h2>AI-Powered Scheduling</h2>
+      <p>AI-generated insights for optimal truck flow.</p>
+      <ul class="insights">
+        <li>
+          <span class="icon">💡</span>
+          <strong>Optimal Time Slot Suggested</strong>
+          <span class="desc">AI suggests scheduling next 3 trucks between 2:00–3:30 PM to minimize gate congestion.</span>
+        </li>
+        <li>
+          <span class="icon">💡</span>
+          <strong>Pre-Gate In Compliance</strong>
+          <span class="desc">Truck ID-5678 is 95% likely compliant. Expedite pre-gate entry.</span>
+        </li>
+        <li>
+          <span class="icon">💡</span>
+          <strong>Vehicle Rerouting Alert</strong>
+          <span class="desc">MH-01 AB 1234 is near a jam. Reroute via Western Bypass.</span>
+        </li>
+      </ul>
+      <button class="ai-button">Apply All Suggestions →</button>
+    </div>
+
   </div>
 </body>
 </html>
