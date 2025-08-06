@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Raw Material Scheduling Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+    .dashboard {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .header h1 {
+      font-size: 1.5em;
+      display: flex;
+      align-items: center;
+    }
+    .header h1::before {
+      content: "🚚";
+      margin-right: 8px;
+    }
+    .header button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      margin-left: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9em;
+    }
+    .header button:last-child {
+      background-color: #e9ecef;
+      color: #000;
+    }
+    .schedule {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .schedule h2 {
+      margin-bottom: 5px;
+    }
+    .schedule p {
+      margin-top: 0;
+      color: #666;
+      font-size: 0.9em;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    table th, table td {
+      border-bottom: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+    .status {
+      border-radius: 12px;
+      padding: 4px 10px;
+      font-size: 0.8em;
+      display: inline-block;
+    }
+    .in-transit {
+      background-color: #fff3cd;
+      color: #856404;
+    }
+    .scheduled {
+      background-color: #d4edda;
+      color: #155724;
+    }
+    .delayed {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <div class="header">
+      <h1>Raw Material Scheduling Dashboard</h1>
+      <div>
+        <button>+ Add Schedule</button>
+        <button>Today's Plan</button>
+      </div>
+    </div>
+    <div class="schedule">
+      <h2>Incoming Truck Schedule</h2>
+      <p>Real-time status of all scheduled raw material deliveries.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>PO NUMBER</th>
+            <th>VEHICLE NUMBER</th>
+            <th>MATERIAL</th>
+            <th>ID CARD</th>
+            <th>STATUS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>PO-78901</td>
+            <td>MH-01 AB 1234</td>
+            <td>Steel Coils</td>
+            <td>ID-5678</td>
+            <td><span class="status in-transit">In Transit</span></td>
+          </tr>
+          <tr>
+            <td>PO-23456</td>
+            <td>GJ-05 CD 5678</td>
+            <td>Cement Bags</td>
+            <td>ID-1234</td>
+            <td><span class="status scheduled">Scheduled</span></td>
+          </tr>
+          <tr>
+            <td>PO-90123</td>
+            <td>KA-04 EF 9012</td>
+            <td>Plastic Pellets</td>
+            <td>ID-9012</td>
+            <td><span class="status delayed">Delayed</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
